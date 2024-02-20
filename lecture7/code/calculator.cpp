@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include <cmath>
 
 // Token stuff
 // Token “kind” values:
@@ -95,6 +96,7 @@ token token_stream::get()    // read a token from the token_stream
     case '-':
     case '*':
     case '/':
+    case '%':
         return token(ch);    // let each character represent itself
     case '.':
     case '0':
@@ -165,6 +167,7 @@ double primary()    // Number or ‘(‘ Expression ‘)’
 double term()
 {
     double left = primary();    // get the Primary
+    double temp = 0;
     while (true)
     {
         token t = ts.get();    // get the next Token ...
@@ -179,6 +182,16 @@ double term()
             if (d == 0)
                 throw std::runtime_error("divide by zero");
             left /= d;
+            break;
+        }
+        case '%':
+        {
+        int d = (int) primary();
+        if (d == 0)
+            throw std::runtime_error("divide by zero");
+            temp = round(left/d);
+            temp = temp *d;
+            left = abs(left - temp);
             break;
         }
         default:
@@ -201,7 +214,7 @@ double expression()
         case '+':
             left += term();
             break;
-        case '-':
+        case '-' :
             left -= term();
             break;
         default:
