@@ -3,12 +3,14 @@
 #include <stdexcept>
 #include <string>
 #include <cmath>
+#include <math.h>
 
 // Token stuff
 // Token “kind” values:
 char const number = '8';    // a floating-point number
 char const quit = 'q';      // an exit command
 char const print = ';';     // a print command
+char const pi = 'p';
 
 class token
 {
@@ -114,6 +116,10 @@ token token_stream::get()    // read a token from the token_stream
         double val;
         std::cin >> val;    // read a floating-point number
         return token(val);
+    }
+    case pi:
+    {
+        return token(M_PI);
     }
     default:
         throw std::runtime_error("Bad token");
