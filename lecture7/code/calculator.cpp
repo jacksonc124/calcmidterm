@@ -11,6 +11,7 @@ char const number = '8';    // a floating-point number
 char const quit = 'q';      // an exit command
 char const print = ';';     // a print command
 char const pi = 'p';
+char const favNum = 'j';
 
 class token
 {
@@ -120,6 +121,10 @@ token token_stream::get()    // read a token from the token_stream
     case pi:
     {
         return token(M_PI);
+    }
+    case favNum:
+    {
+        return token(37.0);
     }
     default:
         throw std::runtime_error("Bad token");
@@ -265,6 +270,9 @@ void calculate()
 
 int main()
 {
+    std::cout << "Welcome to the Calculator!" << std::endl;
+    std::cout << "Enter Mathematical expressions, then follow them with ; to compute." << std::endl;
+    std::cout << "Use p for pi and j for my favorite number!" << std::endl;
     try
     {
         calculate();
