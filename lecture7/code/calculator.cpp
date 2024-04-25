@@ -167,12 +167,15 @@ double primary()    // Number or ‘(‘ Expression ‘)’
             throw std::runtime_error("')' expected");
         return d;
     }
+    case '-':    // handle unary minus
+        return -primary();
     case number:    // we use ‘8’ to represent the “kind” of a number
         return t.value();    // return the number’s value
     default:
         throw std::runtime_error("primary expected");
     }
 }
+
 
 // exactly like expression(), but for * and /
 double term()
