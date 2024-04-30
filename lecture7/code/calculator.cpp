@@ -3,7 +3,6 @@
 #include <stdexcept>
 #include <string>
 #include <cmath>
-#include <math.h>
 
 // Token stuff
 // Token “kind” values:
@@ -120,7 +119,7 @@ token token_stream::get()    // read a token from the token_stream
     }
     case pi:
     {
-        return token(M_PI);
+        return token(3.14159265359);
     }
     case favNum:
     {
